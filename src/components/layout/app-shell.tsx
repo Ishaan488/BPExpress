@@ -1,19 +1,12 @@
 "use client";
 
-import { useSidebar } from "./sidebar-context";
 import Header from "./header";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const { collapsed } = useSidebar();
-
   return (
-    <div
-      className={`flex-1 transition-all duration-300 flex flex-col min-h-screen ${
-        collapsed ? "ml-[72px]" : "ml-[260px]"
-      }`}
-    >
+    <div className="flex flex-col min-h-screen bg-surface-50" style={{ marginLeft: '80px' }}>
       <Header />
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-6 max-w-[1600px] mx-auto w-full">{children}</main>
     </div>
   );
 }

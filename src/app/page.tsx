@@ -185,7 +185,7 @@ export default function DashboardPage() {
       {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Revenue chart */}
-        <div className="lg:col-span-2 glass-card p-5 animate-fade-in opacity-0 delay-200">
+        <div className="lg:col-span-2 glass-card p-5 animate-fade-in opacity-0 delay-200 min-w-0">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-semibold text-surface-800">Revenue Overview</h2>
@@ -231,7 +231,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Order status breakdown */}
-        <div className="glass-card p-5 animate-fade-in opacity-0 delay-300">
+        <div className="glass-card p-5 animate-fade-in opacity-0 delay-300 min-w-0">
           <h2 className="text-base font-semibold text-surface-800 mb-4">Active Orders</h2>
           <div className="space-y-4">
             {ordersByStatus.map((item) => {
@@ -280,7 +280,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Weekly orders bar chart */}
-      <div className="glass-card p-5 animate-fade-in opacity-0 delay-300">
+      <div className="glass-card p-5 animate-fade-in opacity-0 delay-300 min-w-0">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-base font-semibold text-surface-800">Weekly Orders</h2>

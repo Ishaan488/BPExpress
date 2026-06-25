@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/layout/sidebar";
 import AppShell from "@/components/layout/app-shell";
-import { SidebarProvider } from "@/components/layout/sidebar-context";
 
 export const metadata: Metadata = {
   title: "BPExpress — Print Shop Admin",
@@ -25,12 +24,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SidebarProvider>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <AppShell>{children}</AppShell>
-          </div>
-        </SidebarProvider>
+        <Sidebar />
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

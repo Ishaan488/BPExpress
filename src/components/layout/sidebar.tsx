@@ -9,11 +9,8 @@ import {
   CreditCard,
   MessageSquare,
   Settings,
-  ChevronLeft,
-  ChevronRight,
   Printer,
 } from "lucide-react";
-import { useSidebar } from "./sidebar-context";
 
 const navItems = [
   { label: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -26,31 +23,26 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { collapsed, toggle } = useSidebar();
 
   return (
-    <aside
-      className={`fixed top-0 left-0 z-40 h-screen flex flex-col border-r border-surface-200 bg-white transition-all duration-300 ${
-        collapsed ? "w-[72px]" : "w-[260px]"
-      }`}
-    >
+    <aside className="fixed top-0 left-0 z-40 h-screen flex flex-col border-r border-surface-200 bg-white transition-all duration-300 w-20 hover:w-64 group/sidebar overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary-100/50">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 h-16 border-b border-surface-200 shrink-0">
-        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary-600 text-white shrink-0">
+      <div className="flex items-center gap-3 px-5 h-16 border-b border-surface-200 shrink-0 min-w-[256px]">
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary-600 text-white shrink-0">
           <Printer size={20} />
         </div>
-        {!collapsed && (
-          <div className="animate-fade-in">
-            <h1 className="text-lg font-bold text-surface-900 tracking-tight leading-none">
-              BPExpress
-            </h1>
-            <p className="text-[11px] text-surface-400 font-medium">Print Management</p>
-          </div>
-        )}
+        <div className="opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+          <h1 className="text-lg font-bold text-surface-900 tracking-tight leading-none">
+            BPExpress
+          </h1>
+          <p className="text-[11px] text-surface-400 font-medium">
+            Print Management
+          </p>
+        </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-x-hidden overflow-y-auto">
         {navItems.map((item) => {
           const isActive =
             item.href === "/"
@@ -61,39 +53,32 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+              className={`group flex items-center gap-3 p-2 rounded-xl text-sm font-medium transition-all duration-200 min-w-[230px] ${
                 isActive
                   ? "bg-primary-50 text-primary-700 shadow-sm"
                   : "text-surface-500 hover:bg-surface-100 hover:text-surface-800"
               }`}
-              title={collapsed ? item.label : undefined}
             >
-              <item.icon
-                size={20}
-                className={`shrink-0 transition-colors ${
-                  isActive ? "text-primary-600" : "text-surface-400 group-hover:text-surface-600"
-                }`}
-              />
-              {!collapsed && <span>{item.label}</span>}
-              {isActive && !collapsed && (
-                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary-500" />
+              <div className="flex items-center justify-center w-10 h-10 shrink-0">
+                <item.icon
+                  size={22}
+                  className={`transition-colors ${
+                    isActive
+                      ? "text-primary-600"
+                      : "text-surface-400 group-hover:text-surface-600"
+                  }`}
+                />
+              </div>
+              <span className="opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                {item.label}
+              </span>
+              {isActive && (
+                <div className="ml-auto mr-12 w-1.5 h-1.5 rounded-full bg-primary-500 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300" />
               )}
             </Link>
           );
         })}
       </nav>
-
-      {/* Collapse toggle */}
-      <div className="px-3 py-3 border-t border-surface-200">
-        <button
-          onClick={toggle}
-          className="flex items-center justify-center w-full py-2 rounded-xl text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
-          {!collapsed && <span className="ml-2 text-sm">Collapse</span>}
-        </button>
-      </div>
     </aside>
   );
 }
