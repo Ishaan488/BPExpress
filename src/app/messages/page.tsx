@@ -55,16 +55,16 @@ export default function MessagesPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-7rem)]">
+    <div className="h-[calc(100vh-7.5rem)] animate-fade-in">
       <div className="glass-card h-full flex overflow-hidden">
         {/* Left: Conversation list */}
-        <div className="w-[340px] border-r border-surface-200 flex flex-col shrink-0">
+        <div className="w-[320px] md:w-[340px] border-r border-surface-border flex flex-col shrink-0">
           {/* Header */}
-          <div className="px-4 py-3 border-b border-surface-200">
-            <h2 className="text-base font-bold text-surface-800 mb-3">
+          <div className="px-5 py-4 border-b border-surface-border bg-surface-50/20">
+            <h2 className="text-sm font-bold text-surface-900 uppercase tracking-wider mb-3">
               Messages
             </h2>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-surface-200 bg-surface-50">
+            <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-surface-border bg-surface-100 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/10 focus-within:bg-surface-0 transition-all">
               <Search size={14} className="text-surface-400" />
               <input
                 type="text"
@@ -77,43 +77,43 @@ export default function MessagesPage() {
           </div>
 
           {/* Conversation list */}
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto divide-y divide-surface-border/40">
             {filteredConversations.map((conv) => (
               <button
                 key={conv.id}
                 onClick={() => setActiveConversation(conv.id)}
-                className={`w-full text-left px-4 py-3.5 border-b border-surface-50 transition-colors flex items-start gap-3 ${
+                className={`w-full text-left px-5 py-4 transition-all flex items-start gap-3.5 cursor-pointer ${
                   activeConversation === conv.id
-                    ? "bg-primary-50/60"
-                    : "hover:bg-surface-50"
+                    ? "bg-primary-500/5 dark:bg-primary-500/10 border-l-2 border-primary-500 pl-[18px]"
+                    : "hover:bg-surface-100/50"
                 }`}
               >
                 {/* Avatar */}
                 <div className="relative shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
                     {conv.customerAvatar}
                   </div>
                   {conv.isOnline && (
-                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-white" />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full ring-2 ring-surface-0" />
                   )}
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-0.5">
+                  <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-semibold text-surface-800 truncate">
                       {conv.customerName}
                     </span>
-                    <span className="text-[10px] text-surface-400 shrink-0">
+                    <span className="text-[10px] text-surface-400 font-semibold shrink-0">
                       {formatTime(conv.lastMessageAt)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-surface-500 truncate max-w-[200px]">
+                    <p className="text-xs text-surface-500 truncate max-w-[170px] font-medium">
                       {conv.lastMessage}
                     </p>
                     {conv.unreadCount > 0 && (
-                      <span className="shrink-0 w-5 h-5 rounded-full bg-primary-600 text-white text-[10px] font-bold flex items-center justify-center">
+                      <span className="shrink-0 w-4.5 h-4.5 rounded-full bg-primary-500 text-white text-[9px] font-bold flex items-center justify-center shadow-sm">
                         {conv.unreadCount}
                       </span>
                     )}
@@ -126,41 +126,41 @@ export default function MessagesPage() {
 
         {/* Right: Chat area */}
         {currentConversation ? (
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col min-w-0 bg-surface-50/30">
             {/* Chat header */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-surface-200 bg-white/50">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-surface-border bg-surface-0">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
                     {currentConversation.customerAvatar}
                   </div>
                   {currentConversation.isOnline && (
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-white" />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-surface-0" />
                   )}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-surface-800">
+                  <p className="text-sm font-bold text-surface-800">
                     {currentConversation.customerName}
                   </p>
-                  <p className="text-[11px] text-surface-400">
+                  <p className="text-[10px] text-surface-400 font-semibold mt-0.5">
                     {currentConversation.isOnline
                       ? "Online"
                       : `Last seen ${formatTime(currentConversation.lastMessageAt)}`}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
-                <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors">
+              <div className="flex items-center gap-1.5">
+                <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors cursor-pointer">
                   <Phone size={16} />
                 </button>
-                <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors">
+                <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors cursor-pointer">
                   <MoreVertical size={16} />
                 </button>
               </div>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {currentConversation.messages.map((msg) => {
                 const isCustomer = msg.sender === "customer";
                 const isBot = msg.sender === "bot";
@@ -168,13 +168,13 @@ export default function MessagesPage() {
                 return (
                   <div
                     key={msg.id}
-                    className={`flex items-end gap-2 ${
+                    className={`flex items-end gap-2.5 ${
                       isCustomer ? "justify-start" : "justify-end"
                     } animate-fade-in`}
                   >
                     {isCustomer && (
-                      <div className="w-6 h-6 rounded-full bg-surface-200 flex items-center justify-center shrink-0">
-                        <User size={12} className="text-surface-500" />
+                      <div className="w-6 h-6 rounded-lg bg-surface-100 border border-surface-border flex items-center justify-center shrink-0 mb-5">
+                        <User size={12} className="text-surface-400" />
                       </div>
                     )}
 
@@ -185,42 +185,42 @@ export default function MessagesPage() {
                     >
                       {/* Sender label */}
                       <div
-                        className={`flex items-center gap-1.5 mb-1 ${
+                        className={`flex items-center gap-1.5 mb-1.5 ${
                           isCustomer ? "" : "justify-end"
                         }`}
                       >
                         {isBot && (
-                          <Bot size={10} className="text-violet-500" />
+                          <Bot size={11} className="text-violet-500" />
                         )}
                         {!isCustomer && !isBot && (
-                          <Shield size={10} className="text-primary-500" />
+                          <Shield size={11} className="text-primary-500" />
                         )}
-                        <span className="text-[10px] font-medium text-surface-400">
+                        <span className="text-[10px] font-bold text-surface-400 uppercase tracking-wider">
                           {msg.senderName}
                         </span>
                       </div>
 
                       {/* Message bubble */}
                       <div
-                        className={`px-4 py-2.5 text-sm leading-relaxed ${
+                        className={`px-4 py-3 text-sm leading-relaxed border ${
                           isCustomer
-                            ? "bg-surface-100 text-surface-800 rounded-2xl rounded-bl-md"
+                            ? "bg-surface-100 text-surface-800 border-surface-border/50 rounded-2xl rounded-bl-md"
                             : isBot
-                            ? "bg-violet-50 text-violet-900 rounded-2xl rounded-br-md border border-violet-100"
-                            : "bg-primary-600 text-white rounded-2xl rounded-br-md"
+                            ? "bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-500/15 rounded-2xl rounded-br-md"
+                            : "bg-primary-500 text-white border-primary-500 rounded-2xl rounded-br-md font-medium"
                         }`}
                       >
                         {msg.content}
                         {msg.attachmentUrl && (
-                          <div className="mt-2 flex items-center gap-2 px-3 py-2 rounded-lg bg-white/60 border border-surface-200">
+                          <div className="mt-2.5 flex items-center gap-2.5 px-3 py-2 rounded-lg bg-surface-0 border border-surface-border shadow-sm">
                             {msg.attachmentType === "pdf" ? (
                               <FileText size={14} className="text-red-500" />
                             ) : msg.attachmentType === "image" ? (
                               <Image size={14} className="text-blue-500" />
                             ) : (
-                              <FileText size={14} className="text-surface-500" />
+                              <FileText size={14} className="text-surface-400" />
                             )}
-                            <span className="text-xs font-medium text-surface-600 truncate">
+                            <span className="text-xs font-semibold text-surface-700 truncate">
                               Attachment
                             </span>
                           </div>
@@ -229,7 +229,7 @@ export default function MessagesPage() {
 
                       {/* Timestamp */}
                       <p
-                        className={`text-[10px] text-surface-400 mt-1 ${
+                        className={`text-[10px] text-surface-400 font-semibold mt-1.5 ${
                           isCustomer ? "" : "text-right"
                         }`}
                       >
@@ -242,10 +242,10 @@ export default function MessagesPage() {
 
                     {!isCustomer && (
                       <div
-                        className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                        className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mb-5 border ${
                           isBot
-                            ? "bg-violet-100 text-violet-600"
-                            : "bg-primary-100 text-primary-600"
+                            ? "bg-violet-500/10 text-violet-500 border-violet-500/20"
+                            : "bg-primary-500/10 text-primary-500 border-primary-500/20"
                         }`}
                       >
                         {isBot ? <Bot size={12} /> : <Shield size={12} />}
@@ -257,17 +257,17 @@ export default function MessagesPage() {
             </div>
 
             {/* Message input */}
-            <div className="px-5 py-3 border-t border-surface-200 bg-white/50">
+            <div className="px-6 py-4 border-t border-surface-border bg-surface-0">
               <div className="flex items-end gap-3">
                 <div className="flex items-center gap-1">
-                  <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors">
+                  <button className="p-2.5 rounded-xl text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors cursor-pointer">
                     <Paperclip size={18} />
                   </button>
-                  <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors">
+                  <button className="p-2.5 rounded-xl text-surface-400 hover:bg-surface-100 hover:text-surface-600 transition-colors cursor-pointer">
                     <SmilePlus size={18} />
                   </button>
                 </div>
-                <div className="flex-1 flex items-end gap-2 px-4 py-2.5 rounded-2xl border border-surface-200 focus-within:border-primary-400 focus-within:ring-2 focus-within:ring-primary-100 transition-all">
+                <div className="flex-1 flex items-end gap-2.5 px-4 py-2.5 rounded-2xl border border-surface-border bg-surface-50 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/10 focus-within:bg-surface-0 transition-all">
                   <textarea
                     rows={1}
                     placeholder="Type a message..."
@@ -282,15 +282,15 @@ export default function MessagesPage() {
                     }}
                   />
                 </div>
-                <button className="p-3 rounded-2xl bg-primary-600 text-white hover:bg-primary-700 transition-colors shrink-0">
+                <button className="p-3 rounded-2xl bg-primary-500 text-white hover:bg-primary-600 transition-colors shrink-0 shadow-sm cursor-pointer">
                   <Send size={16} />
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-surface-400">
-            <p className="text-sm">Select a conversation to start messaging</p>
+          <div className="flex-1 flex items-center justify-center text-surface-400 bg-surface-50/10">
+            <p className="text-sm font-semibold">Select a conversation to start messaging</p>
           </div>
         )}
       </div>

@@ -3,30 +3,31 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Primary palette — deep indigo */
-  --color-primary-50: #eef2ff;
-  --color-primary-100: #e0e7ff;
-  --color-primary-200: #c7d2fe;
-  --color-primary-300: #a5b4fc;
-  --color-primary-400: #818cf8;
-  --color-primary-500: #6366f1;
-  --color-primary-600: #4f46e5;
-  --color-primary-700: #4338ca;
-  --color-primary-800: #3730a3;
-  --color-primary-900: #312e81;
+  /* Primary palette mapped to dynamic variables */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
 
-  /* Surface colors */
-  --color-surface-50: #f8fafc;
-  --color-surface-100: #f1f5f9;
-  --color-surface-200: #e2e8f0;
-  --color-surface-300: #cbd5e1;
-  --color-surface-400: #94a3b8;
-  --color-surface-500: #64748b;
-  --color-surface-600: #475569;
-  --color-surface-700: #334155;
-  --color-surface-800: #1e293b;
-  --color-surface-900: #0f172a;
-  --color-surface-950: #020617;
+  /* Surface colors mapped to dynamic variables */
+  --color-surface-0: var(--surface-0);
+  --color-surface-50: var(--surface-50);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-surface-300: var(--surface-300);
+  --color-surface-400: var(--surface-400);
+  --color-surface-500: var(--surface-500);
+  --color-surface-600: var(--surface-600);
+  --color-surface-700: var(--surface-700);
+  --color-surface-800: var(--surface-800);
+  --color-surface-900: var(--surface-900);
+  --color-surface-950: var(--surface-950);
 
   /* Status colors */
   --color-status-pending: #f59e0b;
@@ -34,9 +35,87 @@
   --color-status-printing: #8b5cf6;
   --color-status-completed: #10b981;
   --color-status-cancelled: #ef4444;
-  --color-status-failed: #ef4444;
   --color-status-paid: #10b981;
+  --color-status-failed: #ef4444;
   --color-status-refunded: #f97316;
+}
+
+:root {
+  /* Premium Light mode (Warm zinc & clean blue/indigo accents) */
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #818cf8;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --primary-800: #3730a3;
+  --primary-900: #312e81;
+
+  --surface-0: #ffffff;
+  --surface-50: #fafafa;
+  --surface-100: #f4f4f5;
+  --surface-200: #e4e4e7;
+  --surface-300: #d4d4d8;
+  --surface-400: #a1a1aa;
+  --surface-500: #71717a;
+  --surface-600: #52525b;
+  --surface-700: #3f3f46;
+  --surface-800: #27272a;
+  --surface-900: #18181b;
+  --surface-950: #09090b;
+
+  --surface-border: rgba(9, 9, 11, 0.08);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --shadow-color: rgba(0, 0, 0, 0.04);
+
+  --chart-line: #52525b;
+  --chart-fill-start: rgba(82, 82, 91, 0.12);
+  --chart-fill-end: rgba(82, 82, 91, 0);
+  --chart-bar-start: rgba(82, 82, 91, 0.55);
+  --chart-bar-end: rgba(82, 82, 91, 0.08);
+  --chart-grid: rgba(0, 0, 0, 0.06);
+  --chart-tick: #a1a1aa;
+}
+
+.dark {
+  /* Premium Dark mode (Vercel/Linear style Zinc deep charcoal & sleek accents) */
+  --primary-50: #1a1b35;
+  --primary-100: #20224d;
+  --primary-200: #2e327a;
+  --primary-300: #3b3f9f;
+  --primary-400: #4f53cd;
+  --primary-500: #6366f1;
+  --primary-600: #818cf8;
+  --primary-700: #a5b4fc;
+  --primary-800: #c7d2fe;
+  --primary-900: #e0e7ff;
+
+  --surface-0: #171717;      /* Neutral-900 cards */
+  --surface-50: #0a0a0a;     /* Neutral-950 page bg */
+  --surface-100: #1c1c20;    /* Muted card hovers, inner panels */
+  --surface-200: #2e2e33;    /* Distinct tabs / active states */
+  --surface-300: #3f3f46;    /* Dark borders / lines */
+  --surface-400: #52525b;
+  --surface-500: #71717a;    /* Muted secondary labels */
+  --surface-600: #a1a1aa;
+  --surface-700: #d4d4d8;
+  --surface-800: #e4e4e7;    /* Body text */
+  --surface-900: #fafafa;    /* Pure heading titles */
+  --surface-950: #ffffff;
+
+  --surface-border: rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
+  --chart-line: #a1a1aa;
+  --chart-fill-start: rgba(161, 161, 170, 0.15);
+  --chart-fill-end: rgba(161, 161, 170, 0);
+  --chart-bar-start: rgba(161, 161, 170, 0.7);
+  --chart-bar-end: rgba(161, 161, 170, 0.15);
+  --chart-grid: rgba(255, 255, 255, 0.04);
+  --chart-tick: #52525b;
 }
 
 /* ---- Base styles ---- */
@@ -52,11 +131,11 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-surface-50);
-  color: var(--color-surface-900);
+  background-color: var(--surface-50);
+  color: var(--surface-800);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ---- Scrollbar styling ---- */
@@ -68,106 +147,159 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-300);
+  background: var(--surface-200);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-surface-400);
+  background: var(--surface-300);
 }
 
 /* ---- Utility classes ---- */
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--color-surface-200);
-  border-radius: 16px;
+  background-color: var(--surface-0);
+  border: 1px solid var(--surface-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.dark .glass-card {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-card-interactive:hover {
+  background-color: color-mix(in srgb, var(--surface-100) 40%, var(--surface-0));
+}
+
+.section-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--surface-400);
+}
+
+/* Card inner layout — aligned content rows */
+.card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 10px;
+}
+
+.card-body-inset {
+  padding-left: 1.25rem;
+}
+
+/* Prevent Recharts / grid children from overflowing their column */
+.chart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.dashboard-section {
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-section {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-section {
+    margin-bottom: 4rem;
+  }
+}
+
+.dashboard-section:last-child {
+  margin-bottom: 0;
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: capitalize;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
 }
 
-.status-pending {
-  background: #fef3c7;
-  color: #92400e;
-}
-.status-approved {
-  background: #dbeafe;
-  color: #1e40af;
-}
-.status-printing {
-  background: #ede9fe;
-  color: #5b21b6;
-}
-.status-completed {
-  background: #d1fae5;
-  color: #065f46;
-}
-.status-cancelled {
-  background: #fee2e2;
-  color: #991b1b;
-}
-.status-paid {
-  background: #d1fae5;
-  color: #065f46;
-}
-.status-failed {
-  background: #fee2e2;
-  color: #991b1b;
-}
-.status-refunded {
-  background: #ffedd5;
-  color: #9a3412;
+/* Light mode statuses — soft tinted backgrounds with borders */
+.status-pending { background: rgba(245, 158, 11, 0.1); color: #b45309; border-color: rgba(245, 158, 11, 0.2); }
+.status-approved { background: rgba(59, 130, 246, 0.1); color: #1d4ed8; border-color: rgba(59, 130, 246, 0.2); }
+.status-printing { background: rgba(139, 92, 246, 0.1); color: #6d28d9; border-color: rgba(139, 92, 246, 0.2); }
+.status-completed { background: rgba(16, 185, 129, 0.1); color: #047857; border-color: rgba(16, 185, 129, 0.2); }
+.status-cancelled { background: rgba(239, 68, 68, 0.1); color: #b91c1c; border-color: rgba(239, 68, 68, 0.2); }
+.status-paid { background: rgba(16, 185, 129, 0.1); color: #047857; border-color: rgba(16, 185, 129, 0.2); }
+.status-failed { background: rgba(239, 68, 68, 0.1); color: #b91c1c; border-color: rgba(239, 68, 68, 0.2); }
+.status-refunded { background: rgba(249, 115, 22, 0.1); color: #c2410c; border-color: rgba(249, 115, 22, 0.2); }
+
+/* Dark mode statuses overrides */
+.dark {
+  .status-pending { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border-color: rgba(245, 158, 11, 0.2); }
+  .status-approved { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border-color: rgba(59, 130, 246, 0.2); }
+  .status-printing { background: rgba(139, 92, 246, 0.1); color: #a78bfa; border-color: rgba(139, 92, 246, 0.2); }
+  .status-completed { background: rgba(16, 185, 129, 0.1); color: #34d399; border-color: rgba(16, 185, 129, 0.2); }
+  .status-cancelled { background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.2); }
+  .status-paid { background: rgba(16, 185, 129, 0.1); color: #34d399; border-color: rgba(16, 185, 129, 0.2); }
+  .status-failed { background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.2); }
+  .status-refunded { background: rgba(249, 115, 22, 0.1); color: #fb923c; border-color: rgba(249, 115, 22, 0.2); }
 }
 
 /* ---- Animations ---- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-12px); }
+  from { opacity: 0; transform: translateX(-8px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.6; }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-in-left {
-  animation: slideInLeft 0.3s ease-out forwards;
+  animation: slideInLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+  animation: pulse-soft 2.5s ease-in-out infinite;
 }
 
 /* Staggered animation delays */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
+.delay-100 { animation-delay: 0.05s; }
+.delay-200 { animation-delay: 0.1s; }
+.delay-300 { animation-delay: 0.15s; }
+.delay-400 { animation-delay: 0.2s; }
 
 /* ---- Toggle switch ---- */
 .toggle-switch {
   position: relative;
   width: 44px;
   height: 24px;
-  background-color: var(--color-surface-200);
+  background-color: var(--surface-200);
   border-radius: 999px;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -187,7 +319,7 @@ body {
 }
 
 input:checked + .toggle-switch {
-  background-color: var(--color-primary-600);
+  background-color: var(--color-primary-500);
 }
 
 input:checked + .toggle-switch::after {
@@ -206,8 +338,8 @@ input:focus + .toggle-switch {
 .loading-spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid var(--color-surface-200);
-  border-top-color: var(--color-primary-600);
+  border: 3px solid var(--surface-100);
+  border-top-color: var(--color-primary-500);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
@@ -221,9 +353,9 @@ input:focus + .toggle-switch {
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-surface-100) 25%,
-    var(--color-surface-200) 50%,
-    var(--color-surface-100) 75%
+    var(--surface-100) 25%,
+    var(--surface-200) 50%,
+    var(--surface-100) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;

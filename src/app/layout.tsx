@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "@/components/layout/sidebar";
 import AppShell from "@/components/layout/app-shell";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "BPExpress — Print Shop Admin",
@@ -24,8 +24,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Sidebar />
-        <AppShell>{children}</AppShell>
+        <ThemeProvider>
+          <AppShell>{children}</AppShell>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -17,7 +17,6 @@ import {
   Download,
   MessageSquare,
   Printer,
-  ChevronDown,
   Eye,
 } from "lucide-react";
 import { orders } from "@/lib/mock-data";
@@ -40,12 +39,12 @@ export default function OrderDetailPage({
 
   if (!order) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-surface-400">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-surface-400 bg-surface-50">
         <FileText size={48} className="mb-3 opacity-30" />
-        <p className="text-lg font-semibold">Order not found</p>
+        <p className="text-lg font-bold text-surface-800">Order not found</p>
         <Link
           href="/orders"
-          className="mt-3 text-sm text-primary-600 hover:text-primary-700 flex items-center gap-1"
+          className="mt-3 text-sm font-semibold text-primary-500 hover:text-primary-600 flex items-center gap-1"
         >
           <ArrowLeft size={14} /> Back to orders
         </Link>
@@ -57,46 +56,46 @@ export default function OrderDetailPage({
     activeProof >= 0 ? order.proofVersions[activeProof] : null;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in pb-10">
       {/* Breadcrumb + Back */}
       <div className="flex items-center gap-3">
         <Link
           href="/orders"
-          className="flex items-center gap-1.5 text-sm text-surface-500 hover:text-primary-600 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-semibold text-surface-500 hover:text-primary-500 transition-colors uppercase tracking-wider"
         >
-          <ArrowLeft size={16} />
+          <ArrowLeft size={14} />
           Orders
         </Link>
         <span className="text-surface-300">/</span>
-        <span className="text-sm font-medium text-surface-700">
+        <span className="text-xs font-bold text-surface-800 uppercase tracking-wider">
           {order.orderNumber}
         </span>
       </div>
 
       {/* Order header card */}
-      <div className="glass-card p-5">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="glass-card p-6 card-body-inset">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center shrink-0">
-              <FileText size={22} className="text-primary-600" />
+            <div className="w-12 h-12 rounded-xl bg-primary-500/10 flex items-center justify-center shrink-0">
+              <FileText size={22} className="text-primary-500" />
             </div>
             <div>
               <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="text-xl font-bold text-surface-900">
+                <h1 className="text-xl font-extrabold text-surface-900 tracking-tight">
                   {order.title}
                 </h1>
                 <StatusBadge status={order.status} />
               </div>
-              <p className="text-sm text-surface-500 mt-1">
+              <p className="text-sm text-surface-500 mt-1 font-medium">
                 {order.description}
               </p>
-              <div className="flex items-center gap-4 mt-3 flex-wrap">
-                <div className="flex items-center gap-1.5 text-sm text-surface-500">
-                  <Phone size={13} />
+              <div className="flex items-center gap-4 mt-4 flex-wrap text-xs text-surface-500 font-semibold">
+                <div className="flex items-center gap-1.5">
+                  <Phone size={13} className="text-surface-400" />
                   {order.customerName} · {order.customerPhone}
                 </div>
-                <div className="flex items-center gap-1.5 text-sm text-surface-500">
-                  <Calendar size={13} />
+                <div className="flex items-center gap-1.5">
+                  <Calendar size={13} className="text-surface-400" />
                   Due:{" "}
                   {new Date(order.dueDate).toLocaleDateString("en-IN", {
                     day: "numeric",
@@ -104,8 +103,8 @@ export default function OrderDetailPage({
                     year: "numeric",
                   })}
                 </div>
-                <div className="flex items-center gap-1.5 text-sm text-surface-500">
-                  <CreditCard size={13} />
+                <div className="flex items-center gap-1.5">
+                  <CreditCard size={13} className="text-surface-400" />
                   ₹{order.totalAmount.toLocaleString("en-IN")}
                   <StatusBadge status={order.paymentStatus} />
                 </div>
@@ -114,32 +113,32 @@ export default function OrderDetailPage({
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 flex-wrap shrink-0">
             {order.status === "pending" && (
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 transition-colors shadow-sm cursor-pointer">
                 <Upload size={15} />
                 Upload Proof
               </button>
             )}
             {order.status === "approved" && (
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors shadow-sm cursor-pointer">
                 <Printer size={15} />
                 Start Printing
               </button>
             )}
             {order.status === "printing" && (
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer">
                 <CheckCircle2 size={15} />
                 Mark as Ready
               </button>
             )}
             {order.paymentStatus === "pending" && (
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-200 text-surface-700 text-sm font-semibold hover:bg-surface-50 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-border bg-surface-0 text-surface-700 text-sm font-semibold hover:bg-surface-100 transition-colors cursor-pointer">
                 <CreditCard size={15} />
                 Generate Payment Link
               </button>
             )}
-            <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-200 text-surface-700 text-sm font-semibold hover:bg-surface-50 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-border bg-surface-0 text-surface-700 text-sm font-semibold hover:bg-surface-100 transition-colors cursor-pointer">
               <Send size={15} />
               Send to WhatsApp
             </button>
@@ -148,21 +147,21 @@ export default function OrderDetailPage({
       </div>
 
       {/* Split screen: Proof viewer + Comments */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Left: Proof viewer (3/5) */}
-        <div className="lg:col-span-3 glass-card overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-3 border-b border-surface-200 bg-surface-50/50">
-            <h2 className="text-sm font-semibold text-surface-700">
+        <div className="lg:col-span-3 glass-card overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-surface-border bg-surface-50/50">
+            <h2 className="text-xs font-bold text-surface-900 uppercase tracking-wider">
               Proof Viewer
             </h2>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               {order.proofVersions.map((proof, idx) => (
                 <button
                   key={proof.id}
                   onClick={() => setActiveProof(idx)}
-                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     activeProof === idx
-                      ? "bg-primary-100 text-primary-700"
+                      ? "bg-primary-500/10 text-primary-500"
                       : "bg-surface-100 text-surface-500 hover:bg-surface-200"
                   }`}
                 >
@@ -173,19 +172,19 @@ export default function OrderDetailPage({
           </div>
 
           {/* Proof content */}
-          <div className="p-6">
+          <div className="p-6 flex-1 flex flex-col justify-center">
             {currentProof ? (
               <div className="space-y-4">
                 {/* Mock PDF preview */}
-                <div className="aspect-[4/3] bg-surface-100 rounded-2xl border-2 border-dashed border-surface-200 flex flex-col items-center justify-center">
+                <div className="aspect-[4/3] bg-surface-50 rounded-2xl border border-dashed border-surface-border flex flex-col items-center justify-center p-6 text-center">
                   <FileText
                     size={48}
                     className="text-surface-300 mb-3"
                   />
-                  <p className="text-sm font-medium text-surface-500">
+                  <p className="text-sm font-bold text-surface-800">
                     {currentProof.fileName}
                   </p>
-                  <p className="text-xs text-surface-400 mt-1">
+                  <p className="text-xs text-surface-400 mt-1 font-medium">
                     Uploaded{" "}
                     {new Date(currentProof.uploadedAt).toLocaleDateString(
                       "en-IN",
@@ -197,12 +196,12 @@ export default function OrderDetailPage({
                       }
                     )}
                   </p>
-                  <div className="flex items-center gap-2 mt-4">
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-surface-200 text-xs font-medium text-surface-600 hover:bg-surface-50 transition-colors">
+                  <div className="flex items-center gap-2 mt-5">
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-0 border border-surface-border text-xs font-semibold text-surface-600 hover:bg-surface-100 transition-colors cursor-pointer">
                       <Eye size={13} />
                       Preview
                     </button>
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-surface-200 text-xs font-medium text-surface-600 hover:bg-surface-50 transition-colors">
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-0 border border-surface-border text-xs font-semibold text-surface-600 hover:bg-surface-100 transition-colors cursor-pointer">
                       <Download size={13} />
                       Download
                     </button>
@@ -210,21 +209,21 @@ export default function OrderDetailPage({
                 </div>
 
                 {/* Proof status */}
-                <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-surface-50 border border-surface-100">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-surface-50 border border-surface-border">
+                  <div className="flex items-center gap-2 text-xs font-bold text-surface-800">
                     {currentProof.status === "approved" && (
                       <CheckCircle2
                         size={16}
-                        className="text-emerald-500"
+                        className="text-emerald-500 shrink-0"
                       />
                     )}
                     {currentProof.status === "rejected" && (
-                      <XCircle size={16} className="text-red-500" />
+                      <XCircle size={16} className="text-red-500 shrink-0" />
                     )}
                     {currentProof.status === "pending" && (
-                      <Clock size={16} className="text-amber-500" />
+                      <Clock size={16} className="text-amber-500 shrink-0" />
                     )}
-                    <span className="text-sm font-medium text-surface-700 capitalize">
+                    <span className="capitalize">
                       Proof V{currentProof.version} —{" "}
                       {currentProof.status}
                     </span>
@@ -233,15 +232,15 @@ export default function OrderDetailPage({
                 </div>
               </div>
             ) : (
-              <div className="aspect-[4/3] bg-surface-50 rounded-2xl border-2 border-dashed border-surface-200 flex flex-col items-center justify-center">
+              <div className="aspect-[4/3] bg-surface-50 rounded-2xl border-2 border-dashed border-surface-border flex flex-col items-center justify-center p-6 text-center">
                 <Upload size={40} className="text-surface-300 mb-3" />
-                <p className="text-sm font-medium text-surface-500">
+                <p className="text-sm font-bold text-surface-800">
                   No proofs uploaded yet
                 </p>
-                <p className="text-xs text-surface-400 mt-1">
+                <p className="text-xs text-surface-400 mt-1 font-medium">
                   Upload a proof to send to the customer for approval
                 </p>
-                <button className="mt-4 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors">
+                <button className="mt-5 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 transition-colors cursor-pointer">
                   <Upload size={14} />
                   Upload Proof
                 </button>
@@ -250,13 +249,13 @@ export default function OrderDetailPage({
           </div>
 
           {/* Source file info */}
-          <div className="px-5 py-3 border-t border-surface-200 bg-surface-50/50 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-surface-500">
-              <FileText size={14} />
-              Source: <span className="font-medium text-surface-700">{order.fileName}</span>
-              <span className="text-surface-400">({order.fileSize})</span>
+          <div className="px-6 py-4 border-t border-surface-border bg-surface-50/50 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-semibold text-surface-500">
+              <FileText size={14} className="text-surface-400" />
+              Source: <span className="font-bold text-surface-700">{order.fileName}</span>
+              <span className="text-surface-400 font-medium">({order.fileSize})</span>
             </div>
-            <button className="text-xs text-primary-600 font-medium hover:text-primary-700 transition-colors flex items-center gap-1">
+            <button className="text-xs text-primary-500 font-semibold hover:text-primary-600 transition-colors flex items-center gap-1 cursor-pointer">
               <Download size={12} />
               Download Source
             </button>
@@ -265,67 +264,64 @@ export default function OrderDetailPage({
 
         {/* Right: Comment thread (2/5) */}
         <div className="lg:col-span-2 glass-card flex flex-col overflow-hidden">
-          <div className="flex items-center gap-2 px-5 py-3 border-b border-surface-200 bg-surface-50/50">
-            <MessageSquare size={15} className="text-surface-500" />
-            <h2 className="text-sm font-semibold text-surface-700">
+          <div className="flex items-center gap-2 px-5 py-4 border-b border-surface-border bg-surface-50/50">
+            <MessageSquare size={15} className="text-surface-400" />
+            <h2 className="text-xs font-bold text-surface-900 uppercase tracking-wider">
               Comments & Notes
             </h2>
           </div>
 
           {/* Comment list */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[500px]">
+          <div className="flex-1 overflow-y-auto p-5 space-y-4 max-h-[500px]">
             {order.proofVersions.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-12 text-surface-400">
+              <div className="flex flex-col items-center justify-center py-16 text-surface-400">
                 <MessageSquare size={32} className="mb-2 opacity-30" />
-                <p className="text-sm">No comments yet</p>
+                <p className="text-sm font-semibold">No comments yet</p>
               </div>
             ) : (
               order.proofVersions.map((proof) =>
-                proof.comments.map((comment, cidx) => (
-                  <div
-                    key={`${proof.id}-${cidx}`}
-                    className="flex gap-3 animate-fade-in"
-                    style={{ animationDelay: `${cidx * 60}ms` }}
-                  >
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-surface-200 to-surface-300 flex items-center justify-center text-[10px] font-bold text-surface-600 shrink-0 mt-0.5">
-                      {cidx === proof.comments.length - 1 &&
-                      proof.status === "approved"
-                        ? "C"
-                        : "A"}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-xs font-semibold text-surface-700">
-                          {cidx === proof.comments.length - 1 &&
-                          proof.status === "approved"
-                            ? order.customerName
-                            : "Admin"}
-                        </span>
-                        <span className="text-[10px] text-surface-400">
-                          V{proof.version}
-                        </span>
+                proof.comments.map((comment, cidx) => {
+                  const isCustomerComment = cidx === proof.comments.length - 1 && proof.status === "approved";
+                  return (
+                    <div
+                      key={`${proof.id}-${cidx}`}
+                      className="flex gap-3 animate-fade-in"
+                      style={{ animationDelay: `${cidx * 30}ms` }}
+                    >
+                      <div className="w-7 h-7 rounded-full bg-surface-100 flex items-center justify-center text-[10px] font-bold text-surface-500 border border-surface-border shrink-0 mt-0.5">
+                        {isCustomerComment ? "C" : "A"}
                       </div>
-                      <p className="text-sm text-surface-600 bg-surface-50 rounded-xl rounded-tl-none px-3 py-2">
-                        {comment}
-                      </p>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs font-bold text-surface-800">
+                            {isCustomerComment ? order.customerName : "Admin"}
+                          </span>
+                          <span className="text-[10px] font-bold text-surface-400 px-1 bg-surface-100 rounded">
+                            V{proof.version}
+                          </span>
+                        </div>
+                        <p className="text-sm text-surface-600 bg-surface-50 rounded-xl rounded-tl-none px-3.5 py-2 font-medium break-words leading-relaxed border border-surface-border">
+                          {comment}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )
             )}
           </div>
 
           {/* Comment input */}
-          <div className="p-4 border-t border-surface-200">
+          <div className="p-4 border-t border-surface-border">
             <div className="flex items-end gap-2">
               <textarea
                 rows={2}
                 placeholder="Add a comment or note..."
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-xl border border-surface-200 text-sm text-surface-800 placeholder:text-surface-400 outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 resize-none"
+                className="flex-1 px-3.5 py-2 rounded-xl border border-surface-border text-sm text-surface-850 placeholder:text-surface-400 bg-surface-50 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 transition-all resize-none"
               />
-              <button className="p-2.5 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition-colors shrink-0">
+              <button className="p-3 rounded-xl bg-primary-500 text-white hover:bg-primary-600 transition-colors shrink-0 cursor-pointer">
                 <Send size={16} />
               </button>
             </div>
@@ -334,8 +330,8 @@ export default function OrderDetailPage({
       </div>
 
       {/* Order timeline */}
-      <div className="glass-card p-5">
-        <h2 className="text-sm font-semibold text-surface-700 mb-4">
+      <div className="glass-card p-6 card-body-inset">
+        <h2 className="text-xs font-bold text-surface-900 uppercase tracking-wider mb-6">
           Order Timeline
         </h2>
         <div className="space-y-0">
@@ -392,32 +388,32 @@ export default function OrderDetailPage({
             <div key={idx} className="flex items-start gap-4">
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors border ${
                     step.done
-                      ? "bg-primary-100 text-primary-600"
-                      : "bg-surface-100 text-surface-400"
+                      ? "bg-primary-500/10 text-primary-500 border-primary-500/20"
+                      : "bg-surface-100 text-surface-400 border-surface-border"
                   }`}
                 >
-                  <step.icon size={14} />
+                  <step.icon size={13} className="stroke-[2.5]" />
                 </div>
                 {idx < arr.length - 1 && (
                   <div
-                    className={`w-px h-8 ${
-                      step.done ? "bg-primary-200" : "bg-surface-200"
+                    className={`w-px h-8 transition-colors ${
+                      step.done ? "bg-primary-500/40" : "bg-surface-200"
                     }`}
                   />
                 )}
               </div>
               <div className="pb-4">
                 <p
-                  className={`text-sm font-medium ${
+                  className={`text-sm font-semibold ${
                     step.done ? "text-surface-800" : "text-surface-400"
                   }`}
                 >
                   {step.label}
                 </p>
                 {step.time && (
-                  <p className="text-xs text-surface-400 mt-0.5">
+                  <p className="text-xs text-surface-400 mt-1 font-semibold">
                     {new Date(step.time).toLocaleDateString("en-IN", {
                       day: "numeric",
                       month: "short",
